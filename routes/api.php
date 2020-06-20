@@ -21,4 +21,6 @@ Route::group([ 'namespace' => 'Api'], function(){
         Route::post('login', 'AuthController@login')->name('login');
     });
 
+    Route::apiResource('teams', 'TeamController');
+
 });
