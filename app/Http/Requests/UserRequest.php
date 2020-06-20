@@ -23,10 +23,22 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|string|min:3|max:191',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:3|max:191'
-        ];
+        $routeName = $this->route()->getName();
+
+        if($routeName === 'login') {
+            return [
+              'email' => 'required|string|email',
+              'password' => 'required|string'
+            ];
+        }
+        else if($routeName === 'register') {
+            return [
+              'name' => 'required|string|min:3|max:191',
+              'email' => 'required|string|email|unique:users',
+              'password' => 'required|string|min:3|max:191'
+            ];
+        }
+
+        return  [];
     }
 }
