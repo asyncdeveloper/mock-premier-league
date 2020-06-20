@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeamRequest;
+use App\Http\Resources\TeamResource;
 use App\Models\Team;
 
 class TeamController extends Controller
@@ -13,6 +14,11 @@ class TeamController extends Controller
         $this->middleware('jwt.verify')->except('index');
     }
 
+    public function index()
+    {
+        return TeamResource::collection(Team::paginate());
+    }
+    
     public function store(TeamRequest $request)
     {
         $data = $request->validated();
