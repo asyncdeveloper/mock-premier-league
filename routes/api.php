@@ -22,5 +22,6 @@ Route::group([ 'namespace' => 'Api'], function(){
     });
 
     Route::apiResource('teams', 'TeamController');
+    Route::apiResource('fixtures', 'FixtureController');
 
 });
