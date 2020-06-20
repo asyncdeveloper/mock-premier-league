@@ -18,6 +18,11 @@ class TeamController extends Controller
     {
         return TeamResource::collection(Team::paginate());
     }
+
+    public function show(Team $team)
+    {
+        return new TeamResource($team);
+    }
     
     public function store(TeamRequest $request)
     {
