@@ -35,4 +35,15 @@ class TeamController extends Controller
         ], 201);
     }
 
+    public function update(TeamRequest $request, Team $team)
+    {
+        $data = $request->validated();
+
+        $team->update($data);
+
+        return response()->json([
+            'message' => 'Team updated successfully.'
+        ]);
+    }
+
 }

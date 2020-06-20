@@ -23,9 +23,23 @@ class TeamRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name' => 'required|string|min:3|max:191',
-            'year_founded' => 'required|digits:4|integer|min:1500|max:'.(date('Y'))
-        ];
+        $routeName = $this->route()->getName();
+
+        switch ($routeName) {
+            case 'teams.store':
+                return [
+                    'name' => 'required|string|min:3|max:191',
+                    'year_founded' => 'required|digits:4|integer|min:1500|max:'.(date('Y'))
+                ];
+                break;
+            case 'teams.update':
+                return  [
+                    'name' => 'nullable|string|min:3|max:191',
+                    'year_founded' => 'nullable|digits:4|integer|min:1500|max:'.(date('Y'))
+                ];
+                break;
+            default:
+                return  [];
+        }
     }
 }
