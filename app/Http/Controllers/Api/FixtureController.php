@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FixtureRequest;
+use App\Http\Resources\FixtureResource;
 use App\Models\Fixture;
 
 class FixtureController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('jwt.verify')->except('index');
+    }
+
+    public function index()
+    {
+        return FixtureResource::collection(Fixture::paginate());
+    }
 
     public function store(FixtureRequest $request)
     {
