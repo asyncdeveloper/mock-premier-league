@@ -72,4 +72,11 @@ class FixtureController extends Controller
         ]);
     }
 
+    public function destroy(Fixture $fixture)
+    {
+        $fixture->delete();
+
+        return response()->noContent();
+    }
+
 }
