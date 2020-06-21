@@ -23,11 +23,27 @@ class FixtureRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title' => 'required|string|min:3|max:191',
-            'match_date' => 'required|date|date_format:Y-m-d H:i:00|after:'. date('Y-m-d H:i:00'),
-            'team1_id' => 'required|string|exists:teams,id',
-            'team2_id' => 'required|string|exists:teams,id'
-        ];
+        $routeName = $this->route()->getName();
+
+        switch ($routeName) {
+            case 'fixtures.store':
+                return [
+                    'title' => 'required|string|min:3|max:191',
+                    'match_date' => 'required|date|date_format:Y-m-d H:i:00|after:'. date('Y-m-d H:i:00'),
+                    'team1_id' => 'required|string|exists:teams,id',
+                    'team2_id' => 'required|string|exists:teams,id'
+                ];
+                break;
+            case 'fixtures.update':
+                return  [
+                    'title' => 'nullable|string|min:3|max:191',
+                    'match_date' => 'nullable|date|date_format:Y-m-d H:i:00|after:'. date('Y-m-d H:i:00'),
+                    'team1_id' => 'nullable|string|exists:teams,id',
+                    'team2_id' => 'nullable|string|exists:teams,id'
+                ];
+                break;
+            default:
+                return [];
+        }
     }
 }
