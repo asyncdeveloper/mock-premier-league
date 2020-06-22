@@ -30,16 +30,16 @@ class FixtureRequest extends FormRequest
                 return [
                     'title' => 'required|string|min:3|max:191',
                     'match_date' => 'required|date|date_format:Y-m-d H:i:00|after:'. date('Y-m-d H:i:00'),
-                    'team1_id' => 'required|string|exists:teams,id',
-                    'team2_id' => 'required|string|exists:teams,id'
+                    'team1_id' => 'required|exists:teams,id',
+                    'team2_id' => 'required|different:team1_id|exists:teams,id|'
                 ];
                 break;
             case 'fixtures.update':
                 return  [
                     'title' => 'nullable|string|min:3|max:191',
                     'match_date' => 'nullable|date|date_format:Y-m-d H:i:00|after:'. date('Y-m-d H:i:00'),
-                    'team1_id' => 'nullable|string|exists:teams,id',
-                    'team2_id' => 'nullable|string|exists:teams,id'
+                    'team1_id' => 'nullable|exists:teams,id',
+                    'team2_id' => 'nullable|different:team1_id|exists:teams,id'
                 ];
                 break;
             default:

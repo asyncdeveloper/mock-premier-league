@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TeamRequest;
 use App\Http\Resources\TeamResource;
 use App\Models\Team;
+use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
@@ -14,8 +15,11 @@ class TeamController extends Controller
         $this->middleware('jwt.verify')->except('index');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if($request->paginate === 'false') {
+            return TeamResource::collection(Team::all());
+        }
         return TeamResource::collection(Team::paginate());
     }
 

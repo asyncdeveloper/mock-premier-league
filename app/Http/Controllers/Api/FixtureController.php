@@ -68,7 +68,7 @@ class FixtureController extends Controller
         $fixture->update($data);
 
         return response()->json([
-            'message' => 'Team updated successfully.'
+            'message' => 'Fixture updated successfully.'
         ]);
     }
 
